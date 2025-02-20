@@ -1,1 +1,0 @@
-<template><p>Favourite Posts</p></template>
