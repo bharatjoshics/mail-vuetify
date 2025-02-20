@@ -20,8 +20,27 @@ export default createStore({
         message: "Hello, work is going on.",
       },
     ],
+    draftEmails: [
+      {
+        name: "Rashmi Joshi Pant",
+        sender: "bharat@mail.com",
+        receiver: "rashmi@mail.com",
+        subject: "Hii",
+        message: "Hii Didiii"
+      }
+    ]
   },
-  mutations: {},
+  mutations: {
+    ADD_INBOX_EMAIL(state, email) {
+      state.inboxEmails.push(email);
+    },
+    ADD_SENT_EMAIL(state, email) {
+      state.sentEmails.push(email);
+    },
+    ADD_DRAFT_EMAIL(state, email) {
+      state.draftEmails.push(email);
+    }
+  },
   actions: {},
   getters: {},
 });
