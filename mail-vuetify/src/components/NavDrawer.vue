@@ -63,13 +63,15 @@ export default {
   methods: {
     //...mapMutations(["addInboxEmail", "addSentEmail", "addDraftEmail"]),
     sendEmail() {
-      const newEmail = { ...this.emailData };
+      const strippedMessage = this.stripHtmlTags(this.emailData.message);
+      const newEmail = { ...this.emailData, message: strippedMessage };
       this.$store.commit("ADD_INBOX_EMAIL",newEmail);
       this.$store.commit("ADD_SENT_EMAIL",newEmail);
       this.resetForm();
     },
     saveDraft() {
-      const draftEmail = { ...this.emailData };
+      const strippedMessage = this.stripHtmlTags(this.emailData.message);
+      const draftEmail = { ...this.emailData, message: strippedMessage };
       this.$store.commit("ADD_DRAFT_EMAIL",draftEmail);
       this.resetForm();
     },
@@ -77,6 +79,10 @@ export default {
       this.emailData = { name: "", sender: "", receiver: "", subject: "", message: "" };
       this.dialog = false;
     },
+    stripHtmlTags(input) {
+      const doc = new DOMParser().parseFromString(input, 'text/html');
+      return doc.body.textContent || "";
+    }
   },
   components: { Template }
 };
