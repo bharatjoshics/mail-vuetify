@@ -39,6 +39,16 @@ export default createStore({
     },
     ADD_DRAFT_EMAIL(state, email) {
       state.draftEmails.push(email);
+    },
+    REMOVE_DRAFT_EMAIL(state, emailToRemove) {
+      state.draftEmails = state.draftEmails.filter(
+        (email) =>
+          email.name !== emailToRemove.name ||
+          email.sender !== emailToRemove.sender ||
+          email.receiver !== emailToRemove.receiver ||
+          email.subject !== emailToRemove.subject ||
+          email.message !== emailToRemove.message
+      );
     }
   },
   actions: {},
